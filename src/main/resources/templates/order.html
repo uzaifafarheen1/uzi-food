@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    font-family: 'Segoe UI', Arial;
+    margin:0;
+    background:linear-gradient(135deg,#eef2f7,#f8f9fb);
+}
+
+/* NAVBAR */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    padding:14px 50px;
+    background:linear-gradient(90deg,#5f2c82,#49a09d);
+    align-items:center;
+    color:white;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    position:sticky;
+    top:0;
+    z-index:999;
+}
+
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:4px;
+    padding:7px 22px;
+    border-radius:12px;
+    background:linear-gradient(45deg,#ff9966,#ff5e62,#ffcc70);
+    box-shadow:0 4px 12px rgba(0,0,0,0.35);
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    opacity:0.9;
+}
+
+.navbar a:hover{
+    opacity:1;
+}
+
+.order-btn{
+    background:linear-gradient(45deg,#ff9966,#ff5e62);
+    padding:8px 18px;
+    border-radius:22px;
+    font-weight:600;
+    box-shadow:0 4px 10px rgba(0,0,0,0.25);
+}
+
+.icons span{
+    cursor:pointer;
+    background:rgba(255,255,255,0.18);
+    padding:7px 11px;
+    border-radius:50%;
+}
+
+/* LAYOUT */
+.container{
+    padding:40px;
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+/* CARD STYLE */
+.card{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* BILL */
+.bill{
+    flex:1;
+    max-width:460px;
+}
+
+.bill h2{
+    margin-top:0;
+    color:#333;
+}
+
+.bill-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:14px;
+    font-size:14px;
+}
+
+.total{
+    margin-top:18px;
+    padding:14px 20px;
+    border-radius:12px;
+    background:#f7f8fc;
+    display:flex;
+    justify-content:space-between;
+    font-weight:600;
+}
+
+/* BUTTON */
+button{
+    margin-top:22px;
+    padding:12px 34px;
+    background:linear-gradient(45deg,#28a745,#218838);
+    border:none;
+    border-radius:28px;
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(0,0,0,0.18);
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+/* QR */
+.qr{
+    width:320px;
+    text-align:center;
+}
+
+.qr img{
+    margin-top:10px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="nav-left">
+        <div class="logo">UZI</div>
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/about">About</a>
+        <a href="/order" id="orderLink" class="order-btn">Order Online (0)</a>
+    </div>
+
+   
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- BILL -->
+    <div class="card bill">
+        <h2>Your Order Summary</h2>
+
+        <div id="billBox"></div>
+
+        <div id="totalAmount" class="total"></div>
+
+        <button onclick="confirmOrder()">Confirm Order</button>
+    </div>
+
+    <!-- QR -->
+    <div id="qrSection" class="card qr">
+        <h3 style="margin-top:0;color:#777;">Awaiting confirmation</h3>
+    </div>
+
+</div>
+
+<script>
+
+const priceList = {
+		"Classic Burger": 150,
+	    "Cheese Burst": 180,
+	    "Spicy Chicken": 200,
+	    "BBQ Delight": 220,
+	    "Double Patty": 250,
+	    "Mexican Blast": 210,
+	    "Churro Confetti": 100,
+	    "Tandoori Burger": 260,
+	    "Crunchy Zinger": 240,
+	    
+	    "Margherita Pizza": 220,
+	    "Farmhouse Pizza": 260,
+	    "Peppy Paneer": 240,
+	    "Mexican Green Wave": 250,
+	    "Cheese Overload": 270,
+	    
+	    "Veg Supreme": 110,
+	    "Mushroom Melt": 190,
+	    "Crispy Chicken Burger": 230,
+	    "Peri Peri Burger": 240,
+	    "Paprika Burger": 100,
+
+	    "White Sauce Pasta": 180,
+	    "Red Sauce Pasta": 170,
+	    "Pink Sauce Pasta": 190,
+	    "Cheesy Alfredo": 210,
+	    "Arrabbiata Pasta": 210,
+	    "Creamy Mushroom Pasta": 220,
+	    "Pesto Pasta": 200,
+	 
+	    "Cheese Lasagna": 280,
+	    "Chicken Lasagna": 320,
+	    "Veg Loaded Lasagna": 300,
+	    "Spinach Corn Lasagna": 310,
+	    "Paneer Lasagna": 330,
+	    "Cheese Burst Lasagna": 340,
+
+	    "Vanilla Icecream": 90,
+	    "Chocolate Shake": 120,
+	    "Strawberry Shake": 110,
+	    "Cold Coffee": 130,
+	    "Butterscotch Icecream": 95,
+	    "Mint Mojito": 140,
+	    "Chocolate Chip Cookie": 150
+	  
+	};
+
+function loadOrder(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    let billHTML = "";
+    let total = 0;
+
+    if(Object.keys(cart).length === 0){
+        document.getElementById("billBox").innerHTML =
+            "<p style='color:#777;'>No items selected.</p>";
+        document.getElementById("totalAmount").innerText = "";
+        return;
+    }
+
+    for(let itemName in cart){
+
+        let qty = cart[itemName].qty;
+        let price = priceList[itemName];
+
+        if(!price) continue;
+
+        let subtotal = qty * price;
+        total += subtotal;
+
+        billHTML += `
+            <div class="bill-item">
+                <span>${itemName} × ${qty}</span>
+                <span style="font-weight:600;color:#5f2c82;">₹${subtotal}</span>
+            </div>
+        `;
+    }
+
+    document.getElementById("billBox").innerHTML = billHTML;
+
+    document.getElementById("totalAmount").innerHTML = `
+        <span>Total Amount</span>
+        <span>₹${total}</span>
+    `;
+}
+
+window.onload = loadOrder;
+
+function confirmOrder(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    if(Object.keys(cart).length === 0){
+        alert("Cart empty!");
+        return;
+    }
+
+    let total = 0;
+    let items = {};
+
+    for(let itemName in cart){
+
+        let qty = cart[itemName].qty;
+        let price = priceList[itemName];
+
+        if(!price) continue;
+
+        total += qty * price;
+        items[itemName] = qty;
+    }
+
+    fetch("/confirmOrder?totalPrice=" + total, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(items)
+    })
+    .then(res => res.text())
+    .then(msg => {
+
+        document.getElementById("qrSection").innerHTML = `
+            <h3 style="color:#333;">${msg}</h3>
+            <h3 style="color:#5f2c82;">Scan QR Code to Pay</h3>
+           <img width="200" height="200"
+     src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=uzi-restaurant@sbi&pn=UZI&am=${total}">
+            <p><b>Amount: ₹${total}</b></p>
+        `;
+
+        localStorage.removeItem("cart");
+    })
+    .catch(err => {
+        alert("Server Error: " + err);
+    });
+}
+
+
+
+</script>
+
+</body>
+</html>

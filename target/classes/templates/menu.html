@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UZI Restaurant - Menu</title>
+</head>
+
+<body style="font-family:Segoe UI, Arial; margin:0; background:#f4f6f9;">
+
+<!-- NAVBAR -->
+<div style="
+    display:flex;
+    justify-content:space-between;
+    padding:14px 40px;
+    background:linear-gradient(90deg,#5f2c82,#49a09d);
+    align-items:center;
+    color:white;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    position:sticky;
+    top:0;
+    z-index:999;
+">
+
+    <div style="display:flex;align-items:center;gap:14px;">
+
+        <!-- ELEGANT LOGO WITH SUBTLE FOOD-STYLE BACKGROUND -->
+        <div style="
+            display:flex;
+            align-items:center;
+            margin-right:28px;
+        ">
+
+            <span style="
+                font-size:20px;
+                font-weight:800;
+                letter-spacing:4px;
+                color:white;
+                padding:7px 20px;
+                border-radius:12px;
+                background:
+                    radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 40%),
+                    radial-gradient(circle at bottom right, rgba(255,204,112,0.35), transparent 45%),
+                    linear-gradient(45deg,#ff9966,#ff5e62,#ffcc70);
+                box-shadow:
+                    0 4px 12px rgba(0,0,0,0.35),
+                    inset 0 1px 3px rgba(255,255,255,0.35);
+                text-shadow:0 2px 6px rgba(0,0,0,0.35);
+                border:1px solid rgba(255,255,255,0.25);
+            ">
+                UZI
+            </span>
+        </div>
+
+        <!-- MENU LINKS (UNCHANGED) -->
+        <a href="/" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Home</a>
+
+        <a href="/menu" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Menu</a>
+
+        <a href="/about" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">About</a>
+
+        <!-- ORDER BUTTON (ID PRESERVED) -->
+        <a href="/order" id="orderLink" style="
+            color:white;
+            margin-left:18px;
+            text-decoration:none;
+            font-size:14px;
+            background:linear-gradient(45deg,#ff9966,#ff5e62);
+            padding:8px 18px;
+            border-radius:22px;
+            font-weight:600;
+            box-shadow:0 4px 10px rgba(0,0,0,0.25);
+        ">
+            Order Online (0)
+        </a>
+    </div>
+
+</div>
+
+
+<!-- SEARCH + DROPDOWN -->
+<div style="padding:20px 40px 0 40px; display:flex; justify-content:space-between; background-color:#FAD5A5; align-items:center;">
+
+    <!-- Wider Search Bar -->
+    <input 
+        type="text" 
+        id="searchInput"
+        placeholder="Search burgers..."
+        onkeyup="filterMenu()"
+        style="
+            padding:12px 18px;
+            width:340px;
+            border-radius:25px;
+            border:1px solid #ddd;
+            outline:none;
+            font-size:14px;
+            box-shadow:0 3px 8px rgba(0,0,0,0.05);
+        "
+    >
+
+    <!-- Dropdown with Icons -->
+    <select 
+        id="typeFilter"
+        onchange="filterMenu()"
+        style="
+            padding:10px 15px;
+            border-radius:20px;
+            border:1px solid #ddd;
+            font-size:14px;
+            background:white;
+            cursor:pointer;
+        "
+    >
+        <option value="both">🍽 Both</option>
+        <option value="veg">🥦 Veg</option>
+        <option value="nonveg">🍗 Non-Veg</option>
+    </select>
+
+</div>
+
+<div style="padding:30px 40px; background-color:#FAD5A5;">
+    <h2>Our New launch</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:25px;" id="menuContainer"></div>
+</div>
+
+
+
+<!-- PIZZA SECTION -->
+<div style="padding:40px; background-color:#FAD5A5;">
+    <h2>Pizza</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;" id="pizzaContainer"></div>
+</div>
+
+<!-- BURGER SECTION -->
+<div style="padding:40px; background-color:#FAD5A5;">
+    <h2>Burger</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;" id="burgerContainer"></div>
+</div>
+
+<!-- PASTA SECTION -->
+<div style="padding:40px; background-color:#FAD5A5;">
+    <h2>Pasta</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;" id="pastaContainer"></div>
+</div>
+
+<!-- LASAGNA SECTION -->
+<div style="padding:40px; background-color:#FAD5A5;">
+    <h2>Lasagna</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;" id="lasagnaContainer"></div>
+</div>
+
+<!-- ICECREAM & DRINKS -->
+<div style="padding:40px; background-color:#FAD5A5;">
+    <h2>Icecream & Drinks</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:30px;" id="iceContainer"></div>
+</div>
+
+
+<script>
+const priceList = {
+    "Classic Burger": 150,
+    "Cheese Burst": 180,
+    "Spicy Chicken": 200,
+    "BBQ Delight": 220,
+    "Double Patty": 250,
+    "Mexican Blast": 210,
+    "Churro Confetti": 100,
+    "Tandoori Burger": 260,
+    "Crunchy Zinger": 240,
+    
+    "Margherita Pizza": 220,
+    "Farmhouse Pizza": 260,
+    "Peppy Paneer": 240,
+    "Mexican Green Wave": 250,
+    "Cheese Overload": 270,
+    
+    "Veg Supreme": 110,
+    "Mushroom Melt": 190,
+    "Crispy Chicken Burger": 230,
+    "Peri Peri Burger": 240,
+    "Paprika Burger": 100,
+
+    "White Sauce Pasta": 180,
+    "Red Sauce Pasta": 170,
+    "Pink Sauce Pasta": 190,
+    "Cheesy Alfredo": 210,
+    "Arrabbiata Pasta": 210,
+    "Creamy Mushroom Pasta": 220,
+    "Pesto Pasta": 200,
+ 
+    "Cheese Lasagna": 280,
+    "Chicken Lasagna": 320,
+    "Veg Loaded Lasagna": 300,
+    "Spinach Corn Lasagna": 310,
+    "Paneer Lasagna": 330,
+    "Cheese Burst Lasagna": 340,
+
+    "Vanilla Icecream": 90,
+    "Chocolate Shake": 120,
+    "Strawberry Shake": 110,
+    "Cold Coffee": 130,
+    "Butterscotch Icecream": 95,
+    "Mint Mojito": 140,
+    "Chocolate Chip Cookie": 150
+  
+};
+
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+function updateCart(name, change){
+    if(!cart[name]){
+        cart[name] = { qty: 0 };
+    }
+    cart[name].qty += change;
+    if(cart[name].qty <= 0){
+        delete cart[name];
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderQuantities();
+    updateNavbar();
+}
+
+function updateNavbar(){
+    let total = 0;
+    for(let item in cart){
+        total += cart[item].qty;
+    }
+    const orderLink = document.getElementById("orderLink");
+    if(orderLink){
+        orderLink.innerText = "Order Online (" + total + ")";
+    }
+}
+
+function renderQuantities(){
+    for(let itemName in priceList){
+        let qtyBox = document.getElementById(itemName);
+        if(qtyBox){
+            qtyBox.innerText = cart[itemName] ? cart[itemName].qty : 0;
+        }
+    }
+}
+
+function createCard(name, imgSrc, width = 240, imgHeight = 140){
+    return `
+    <div style="
+        background:linear-gradient(145deg,#ffffff,#f8fbff);
+        width:${width}px;
+        border-radius:18px;
+        box-shadow:0 12px 30px rgba(0,0,0,0.08);
+        padding:16px;
+        text-align:center;
+        transition:0.3s;
+        position:relative;
+    ">
+        <div style="position:relative;border-radius:14px;overflow:hidden;">
+            <img src="${imgSrc}" style="width:100%;height:${imgHeight}px;object-fit:cover;">
+        </div>
+
+        <h4 style="margin:12px 0 6px 0;font-size:17px;color:#1f2933;">
+            ${name}
+        </h4>
+
+        <p style="margin:0 0 10px 0;font-size:16px;color:#ff5a5f;font-weight:bold;">
+            ₹${priceList[name]}
+        </p>
+
+        <div style="display:flex;justify-content:center;align-items:center;gap:14px;">
+            <button onclick="updateCart('${name}', -1)"
+                style="width:34px;height:34px;border:none;border-radius:50%;background:#111827;color:white;">
+                −
+            </button>
+
+            <span id="${name}" style="min-width:22px;font-size:16px;font-weight:bold;">0</span>
+
+            <button onclick="updateCart('${name}', 1)"
+                style="width:34px;height:34px;border:none;border-radius:50%;background:#ff6b6b;color:white;">
+                +
+            </button>
+        </div>
+    </div>`;
+}
+
+/* ✅ UNIQUE IMAGES PER ITEM */
+
+const menuImages = {
+    "Classic Burger": "https://www.realsimple.com/thmb/z3cQCYXTyDQS9ddsqqlTVE8fnpc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/real-simple-mushroom-black-bean-burgers-recipe-0c365277d4294e6db2daa3353d6ff605.jpg",
+    "Cheese Burst": "https://thumbs.dreamstime.com/b/tasty-burger-french-fries-fire-close-up-home-made-flames-137249900.jpg",
+    "Spicy Chicken": "https://bakerbynature.com/wp-content/uploads/2015/02/Sweet-and-Spicy-Sriracha-Chicken-Wings-0-6.jpg",
+    "BBQ Delight": "https://content3.jdmagicbox.com/v2/comp/bangalore/j4/080pxx80.xx80.180823192232.y2j4/catalogue/barbeque-delight-hosur-road-bangalore-restaurants-0l5khxuzce.jpg",
+    "Double Patty": "https://us2guntur.com/images//10085img/ChickenDoublePatty_B_161120.jpg",
+    "Mexican Blast": "https://www.magnafoodservice.co.uk/wp-content/uploads/vegetarian-and-vegan/burgers/katerveg-spiced-vegetable-supreme-burger-95gm-48pcs.jpg",
+    "Churro Confetti": "https://www.sgcfoodservice.com/media/3C7A3617_small_jxmt56rj.jpg",
+    "Tandoori Burger": "https://static.toiimg.com/photo/53352482.cms",
+    "Crunchy Zinger": "https://i.ytimg.com/vi/kg9FD7ypSTE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBBFyG-7E4iuhiAZPLxlEECdJiP2g"
+};
+
+document.getElementById("menuContainer").innerHTML =
+    Object.keys(menuImages)
+        .map(name => createCard(name, menuImages[name]))
+        .join("");
+        
+        
+
+const pizzaImages = {
+    "Margherita Pizza": "https://safrescobaldistatic.blob.core.windows.net/media/2022/11/PIZZA-MARGHERITA.jpg",
+    "Farmhouse Pizza": "https://media-assets.swiggy.com/swiggy/image/upload/f_auto,q_auto,fl_lossy/f9701b4e9e6aae4febe5e52c9f5e36f9",
+    "Peppy Paneer": "https://blog.eatfit.in/wp-content/uploads/2022/10/original-1024x683.jpg",
+    "Mexican Green Wave": "https://www.kolkatagiftsonline.com/pic/GG09107.jpg",
+    "Cheese Overload": "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/margherita-ultimate-cheese.dd05f6fd1c45d62cdc6c8509d8734f3d.1.jpg",
+    
+};
+
+document.getElementById("pizzaContainer").innerHTML =
+    Object.keys(pizzaImages)
+        .map(name => createCard(name, pizzaImages[name], 270, 160))
+        .join("");
+
+const burgerImages = {
+    "Veg Supreme": "https://rppizzeria.com/web/image/product.template/331/image_1024?unique=efde737",
+    "Mushroom Melt": "https://www.foxvalleyfoodie.com/wp-content/uploads/2020/03/mushroom-swiss-burger-feature.jpg",
+    "Crispy Chicken Burger": "https://www.kitchensanctuary.com/wp-content/uploads/2019/08/Crispy-Chicken-Burger-square-FS-4518.jpg",
+    "Peri Peri Burger": "https://www.krumpli.co.uk/wp-content/uploads/2022/06/Peri-Peri-Chicken-Burger-04.jpg",
+     "Paprika Burger": "https://imagesvs.oneindia.com/img/2025/09/smokehouse_burgers_1757035897227-600x338.jpg"
+};
+
+document.getElementById("burgerContainer").innerHTML =
+    Object.keys(burgerImages)
+        .map(name => createCard(name, burgerImages[name], 270, 160))
+        .join("");
+
+const pastaImages = {
+    "White Sauce Pasta": "https://www.cookwithkushi.com/wp-content/uploads/2016/07/best_white_sauce_pasta_bechamel_sauce.jpg",
+    "Red Sauce Pasta": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/4/8/2/FNM_050114-Classic-Red-Sauce-Recipe_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1397491331300.webp",
+    "Pink Sauce Pasta": "https://www.kuchpakrahahai.in/wp-content/uploads/2024/09/beetroot-sauce-pasta.jpg",
+    "Cheesy Alfredo": "https://www.sharmispassions.com/wp-content/uploads/2015/12/alfredopasta5-500x500.jpg",
+    "Arrabbiata Pasta": "https://www.tasteofhome.com/wp-content/uploads/2025/01/Penne-all-Arrabbiata_EXPS_TOHD24_277252_KristinaVanni_6.jpg",
+    "Creamy Mushroom Pasta": "https://projectmealplan.com/wp-content/uploads/2024/10/one-pot-creamy-mushroom-pasta-plated-side.jpg",
+    "Pesto Pasta": "https://www.justataste.com/wp-content/uploads/2009/01/best-basil-pesto-pasta.jpg"
+};
+
+document.getElementById("pastaContainer").innerHTML =
+    Object.keys(pastaImages)
+        .map(name => createCard(name, pastaImages[name], 270, 160))
+        .join("");
+
+const lasagnaImages = {
+    "Cheese Lasagna": "https://www.tasteofhome.com/wp-content/uploads/2025/07/Best-Lasagna_EXPS_ATBBZ25_36333_DR_07_01_2b.jpg",
+    "Chicken Lasagna": "https://www.sugardishme.com/wp-content/uploads/2019/10/Ground-Chicken-Lasagna-Square.jpg",
+    "Veg Loaded Lasagna": "https://i0.wp.com/myvegetarianroots.com/wp-content/uploads/2020/11/DSC_0061.jpeg?resize=732%2C1024&ssl=1",
+    "Spinach Corn Lasagna": "https://media-cdn.tripadvisor.com/media/photo-s/10/17/5e/1e/spectacular-spinach-corn.jpg",
+    "Paneer Lasagna": "https://www.bigbasket.com/media/uploads/recipe/w-l/1510_2_1.jpg",
+    "Cheese Burst Lasagna": "https://i.ytimg.com/vi/TQL4MT3DDYM/maxresdefault.jpg"
+};
+
+document.getElementById("lasagnaContainer").innerHTML =
+    Object.keys(lasagnaImages)
+        .map(name => createCard(name, lasagnaImages[name], 270, 160))
+        .join("");
+
+const iceImages = {
+    "Vanilla Icecream": "https://delightfuladventures.com/wp-content/uploads/2024/09/vegan-vanilla-ice-cream-recipe.jpg",
+    "Chocolate Shake": "https://www.sharmispassions.com/wp-content/uploads/2012/07/chocolate-milkshake1.jpg",
+    "Strawberry Shake": "https://www.thehungrybites.com/wp-content/uploads/2023/06/Strawberry-milkshake-frappuccino-featured.jpg",
+    "Cold Coffee": "https://bakewithshivesh.com/wp-content/uploads/2021/04/IMG_3613-scaled.jpg",
+    "Butterscotch Icecream": "https://icecreambakery.in/wp-content/uploads/2025/02/butterscotch-ice-cream-recipe.jpg",
+    "Mint Mojito": "https://www.munatycooking.com/wp-content/uploads/2023/10/Virgin-Mojito-image-3-2023.jpg",
+    "Chocolate Chip Cookie": "https://www.thebakingchocolatess.com/wp-content/uploads/2015/06/4VrueFFw-3.jpg"
+};
+
+document.getElementById("iceContainer").innerHTML =
+    Object.keys(iceImages)
+        .map(name => createCard(name, iceImages[name], 270, 160))
+        .join("");
+
+renderQuantities();
+updateNavbar();
+
+
+function filterMenu() {
+
+    const searchText = document.getElementById("searchInput").value.toLowerCase().trim();
+    const typeValue = document.getElementById("typeFilter").value;
+
+    const sections = [
+        "menuContainer",
+        "pizzaContainer",
+        "burgerContainer",
+        "pastaContainer",
+        "lasagnaContainer",
+        "iceContainer"
+    ];
+
+    const isSearching = searchText.length > 0;
+    const isFiltering = typeValue !== "both";
+
+    
+
+    sections.forEach(sectionId => {
+
+        const container = document.getElementById(sectionId);
+        if (!container) return;
+
+        const cards = container.querySelectorAll(":scope > div");
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+
+            const itemName = card.querySelector("h4").innerText.toLowerCase();
+
+            const matchesSearch = itemName.includes(searchText);
+
+            const isVeg = !itemName.includes("chicken");
+
+            const matchesType =
+                typeValue === "both" ||
+                (typeValue === "veg" && isVeg) ||
+                (typeValue === "nonveg" && !isVeg);
+
+            const shouldShow =
+                (!isSearching || matchesSearch) && matchesType;
+
+            card.style.display = shouldShow ? "block" : "none";
+
+            if (shouldShow) visibleCount++;
+        });
+
+        /* ✅ Section visibility logic */
+        if (isSearching || isFiltering) {
+            container.parentElement.style.display = visibleCount ? "block" : "none";
+        } else {
+            container.parentElement.style.display = "block";
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>

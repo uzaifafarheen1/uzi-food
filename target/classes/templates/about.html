@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - UZI Restaurants</title>
+</head>
+<body style="margin:0; font-family: Arial, sans-serif; background-color:#fff8f0;">
+<!-- NAVBAR -->
+<div style="
+    display:flex;
+    justify-content:space-between;
+    padding:14px 40px;
+    background:linear-gradient(90deg,#5f2c82,#49a09d);
+    align-items:center;
+    color:white;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    position:sticky;
+    top:0;
+    z-index:999;
+">
+
+    <div style="display:flex;align-items:center;gap:14px;">
+
+        <!-- ELEGANT LOGO WITH SUBTLE FOOD-STYLE BACKGROUND -->
+        <div style="
+            display:flex;
+            align-items:center;
+            margin-right:28px;
+        ">
+
+            <span style="
+                font-size:20px;
+                font-weight:800;
+                letter-spacing:4px;
+                color:white;
+                padding:7px 20px;
+                border-radius:12px;
+                background:
+                    radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 40%),
+                    radial-gradient(circle at bottom right, rgba(255,204,112,0.35), transparent 45%),
+                    linear-gradient(45deg,#ff9966,#ff5e62,#ffcc70);
+                box-shadow:
+                    0 4px 12px rgba(0,0,0,0.35),
+                    inset 0 1px 3px rgba(255,255,255,0.35);
+                text-shadow:0 2px 6px rgba(0,0,0,0.35);
+                border:1px solid rgba(255,255,255,0.25);
+            ">
+                UZI
+            </span>
+        </div>
+
+        <!-- MENU LINKS (UNCHANGED) -->
+        <a href="/" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Home</a>
+
+        <a href="/menu" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Menu</a>
+
+        <a href="/about" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">About</a>
+
+        <!-- ORDER BUTTON (ID PRESERVED) -->
+        <a href="/order" id="orderLink" style="
+            color:white;
+            margin-left:18px;
+            text-decoration:none;
+            font-size:14px;
+            background:linear-gradient(45deg,#ff9966,#ff5e62);
+            padding:8px 18px;
+            border-radius:22px;
+            font-weight:600;
+            box-shadow:0 4px 10px rgba(0,0,0,0.25);
+        ">
+            Order Online (0)
+        </a>
+    </div>
+
+    
+
+</div>
+
+    <!-- Header Section with Background Image -->
+    <header style="
+        position: relative;
+        height: 300px;
+        background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+    ">
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        ">
+            <h1 style="margin:0; font-size:48px; font-weight:bold;">UZI Restaurants</h1>
+            <p style="margin:10px 0 0 0; font-size:20px;">Delicious Food, Freshly Served!</p>
+        </div>
+    </header>
+
+    <!-- About Us Highlight Section -->
+    <section style="padding:50px 20px; text-align:center; color:#333; background-color:#fff3e6;">
+        <h2 style="font-size:36px; margin-bottom:40px; color:#ff6b6b;">About UZI Restaurants</h2>
+        <div style="max-width:900px; margin:0 auto; padding:30px; background-color:#fff; border-radius:20px; box-shadow:0 6px 15px rgba(0,0,0,0.1);">
+            <p style="font-size:20px; line-height:1.8; color:#555;">
+                Welcome to <strong>UZI Restaurants</strong>, where every meal is a celebration of flavor, freshness, and creativity. 
+                From our farm-fresh ingredients to our masterfully crafted dishes, we aim to deliver a culinary experience that delights 
+                both the taste buds and the heart. Whether you are dining with us or ordering online, every bite is prepared with love, 
+                passion, and dedication to quality.
+            </p>
+        </div>
+    </section>
+
+    <!-- Feature Cards Section -->
+    <section style="padding:50px 20px; text-align:center; background-color:#fff8f0;">
+        <h2 style="font-size:36px; margin-bottom:40px; color:#ff6b6b;">Our Specialties</h2>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
+            <div style="background-color:white; padding:30px; width:280px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center;">
+                <img src="https://media.istockphoto.com/id/1155240408/photo/table-filled-with-large-variety-of-food.jpg?s=612x612&w=0&k=20&c=uJEbKmR3wOxwdhQR_36as5WeP6_HDqfU-QmAq63OVEE=" 
+                     alt="Fresh Ingredients" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+                <h3 style="margin:20px 0 10px 0; color:#ff6b6b;">Fresh Ingredients</h3>
+                <p style="font-size:16px; line-height:1.5; color:#555;">Only the finest, freshest ingredients go into our dishes.</p>
+            </div>
+            <div style="background-color:white; padding:30px; width:280px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center;">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80" 
+                     alt="Creative Dishes" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+                <h3 style="margin:20px 0 10px 0; color:#ff6b6b;">Creative Dishes</h3>
+                <p style="font-size:16px; line-height:1.5; color:#555;">Unique dishes that excite your taste buds and eyes alike.</p>
+            </div>
+            <div style="background-color:white; padding:30px; width:280px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center;">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80" 
+                     alt="Quick Delivery" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+                <h3 style="margin:20px 0 10px 0; color:#ff6b6b;">Quick Delivery</h3>
+                <p style="font-size:16px; line-height:1.5; color:#555;">Fast and reliable delivery, keeping your food fresh and hot.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story / Timeline Section -->
+    <section style="padding:50px 20px; text-align:center; background-color:#fff3e6;">
+        <h2 style="font-size:36px; margin-bottom:40px; color:#ff6b6b;">Our Story</h2>
+        <div style="max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:30px;">
+
+            <div style="display:flex; align-items:center; gap:20px;">
+                <div style="background-color:#ff6b6b; color:white; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold;">2005</div>
+                <p style="font-size:18px; line-height:1.5; color:#555;">UZI Restaurants was founded with a passion for bringing fresh and delicious meals to the community.</p>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:20px;">
+                <div style="background-color:#ff6b6b; color:white; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold;">2010</div>
+                <p style="font-size:18px; line-height:1.5; color:#555;">Expanded to multiple locations, offering a wider variety of creative dishes for food lovers.</p>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:20px;">
+                <div style="background-color:#ff6b6b; color:white; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; font-weight:bold;">2020</div>
+                <p style="font-size:18px; line-height:1.5; color:#555;">Launched online delivery services to bring UZI’s delicious food to your doorstep.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section style="padding:50px 20px; text-align:center; background-color:#ff6b6b; color:white;">
+        <h2 style="font-size:36px; margin-bottom:20px;">Hungry? Let's Eat!</h2>
+        <p style="font-size:20px; margin-bottom:30px; max-width:700px; margin-left:auto; margin-right:auto; line-height:1.6;">
+            Explore our menu and order your favorite dishes online. Delicious food is just a click away!
+        </p>
+        <a href="/menu" style="background-color:white; color:#ff6b6b; padding:15px 30px; text-decoration:none; border-radius:50px; font-size:18px; font-weight:bold;">View Menu / Order Now</a>
+    </section>
+
+</body>
+</html>

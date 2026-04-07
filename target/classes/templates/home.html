@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UZI Restaurant</title>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+    display:flex;
+    justify-content:space-between;
+    padding:14px 40px;
+    background:linear-gradient(90deg,#5f2c82,#49a09d);
+    align-items:center;
+    color:white;
+    box-shadow:0 4px 14px rgba(0,0,0,0.25);
+    position:sticky;
+    top:0;
+    z-index:999;
+">
+
+    <div style="display:flex;align-items:center;gap:14px;">
+
+        <!-- ELEGANT LOGO WITH SUBTLE FOOD-STYLE BACKGROUND -->
+        <div style="
+            display:flex;
+            align-items:center;
+            margin-right:28px;
+        ">
+
+            <span style="
+                font-size:20px;
+                font-weight:800;
+                letter-spacing:4px;
+                color:white;
+                padding:7px 20px;
+                border-radius:12px;
+                background:
+                    radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 40%),
+                    radial-gradient(circle at bottom right, rgba(255,204,112,0.35), transparent 45%),
+                    linear-gradient(45deg,#ff9966,#ff5e62,#ffcc70);
+                box-shadow:
+                    0 4px 12px rgba(0,0,0,0.35),
+                    inset 0 1px 3px rgba(255,255,255,0.35);
+                text-shadow:0 2px 6px rgba(0,0,0,0.35);
+                border:1px solid rgba(255,255,255,0.25);
+            ">
+                UZI
+            </span>
+        </div>
+
+        <!-- MENU LINKS (UNCHANGED) -->
+        <a href="/" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Home</a>
+
+        <a href="/menu" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">Menu</a>
+
+        <a href="/about" style="
+            color:white;
+            margin:0 10px;
+            text-decoration:none;
+            font-size:14px;
+            font-weight:500;
+        ">About</a>
+
+        <!-- ORDER BUTTON (ID PRESERVED) -->
+        <a href="/order" id="orderLink" style="
+            color:white;
+            margin-left:18px;
+            text-decoration:none;
+            font-size:14px;
+            background:linear-gradient(45deg,#ff9966,#ff5e62);
+            padding:8px 18px;
+            border-radius:22px;
+            font-weight:600;
+            box-shadow:0 4px 10px rgba(0,0,0,0.25);
+        ">
+            Order Online (0)
+        </a>
+    </div>
+
+    
+
+</div>
+
+
+<div style="
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:black;
+">
+
+    <!-- BACKGROUND VIDEO -->
+    <video autoplay muted loop playsinline
+        style="
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        ">
+        <source src="https://b.zmtcdn.com/data/file_assets/2627bbed9d6c068e50d2aadcca11ddbb1743095925.mp4" type="video/mp4">
+    </video>
+
+    <!-- CINEMATIC OVERLAY -->
+    <div style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(
+            115deg,
+            rgba(0,0,0,0.85),
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.85)
+        );
+    "></div>
+
+    <!-- SOFT ORANGE AMBIENT GLOW -->
+    <div style="
+        position:absolute;
+        width:600px;
+        height:600px;
+        background:rgba(255,140,0,0.18);
+        filter:blur(140px);
+        border-radius:50%;
+        top:-200px;
+        right:-150px;
+    "></div>
+
+    <!-- CONTENT AREA -->
+    <div style="
+        position:relative;
+        z-index:2;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding:0 9%;
+        color:white;
+    ">
+
+        <!-- LEFT SIDE -->
+        <div style="max-width:540px;">
+
+            <!-- RESTAURANT NAME DESIGN -->
+            <div style="
+                font-size:18px;
+                letter-spacing:4px;
+                color:orange;
+                margin-bottom:10px;
+            ">
+                UZI RESTAURANT
+            </div>
+
+            <h1 style="
+                font-size:60px;
+                margin:0;
+                line-height:1.05;
+                font-weight:700;
+                letter-spacing:-0.5px;
+            ">
+                Crafted Flavours, <br>
+                <span style="
+                    background:linear-gradient(90deg, orange, #ffcc70);
+                    -webkit-background-clip:text;
+                    -webkit-text-fill-color:transparent;
+                ">
+                    Timeless Experience
+                </span>
+            </h1>
+
+            <p style="
+                margin-top:24px;
+                font-size:18px;
+                line-height:1.85;
+                color:#e5e7eb;
+            ">
+                Where culinary passion meets refined ambience. UZI Restaurant
+                delivers a dining journey designed to awaken the senses,
+                blending bold taste, artistic presentation, and unforgettable
+                moments in every visit.
+            </p>
+
+            <div style="margin-top:38px;">
+
+                <button style="
+                    padding:15px 38px;
+                    font-size:16px;
+                    border:none;
+                    border-radius:32px;
+                    background:linear-gradient(90deg, orange, #ffb347);
+                    color:white;
+                    cursor:pointer;
+                    box-shadow:0 12px 35px rgba(0,0,0,0.55);
+                    letter-spacing:0.3px;
+                ">
+                    <a href="/menu" style="text-decoration:none; color:white;">
+                        Explore Menu
+                    </a>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE GLASS PANEL -->
+        <div style="
+            background:rgba(0,0,0,0.45);
+            padding:45px 46px;
+            border-radius:24px;
+            max-width:370px;
+            backdrop-filter: blur(10px);
+            box-shadow:0 25px 60px rgba(0,0,0,0.65);
+            border:1px solid rgba(255,255,255,0.08);
+            position:relative;
+        ">
+
+            <!-- Decorative Accent Line -->
+            <div style="
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:3px;
+                background:linear-gradient(90deg, transparent, orange, transparent);
+                border-radius:24px 24px 0 0;
+            "></div>
+
+            <div style="
+                font-size:26px;
+                font-weight:600;
+                margin-bottom:14px;
+            ">
+                A Symphony of Taste
+            </div>
+
+            <p style="
+                font-size:15px;
+                line-height:1.9;
+                color:#d1d5db;
+                margin:0;
+            ">
+                Every dish is thoughtfully prepared to balance flavour,
+                texture, and aroma. From the first bite to the last,
+                UZI transforms dining into an elegant sensory experience
+                meant to be savoured and remembered.
+            </p>
+
+            <div style="
+                margin-top:26px;
+                font-size:13px;
+                color:orange;
+                letter-spacing:0.6px;
+            ">
+                Signature Cuisine • Refined Atmosphere • Memorable Moments
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div style="
+    position:relative;
+    background:white;
+    padding:120px 20px 100px;
+    text-align:center;
+    overflow:hidden;
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:white;
+">
+
+    <!-- Soft Curved Lines -->
+    <div style="
+        position:absolute;
+        width:900px;
+        height:900px;
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:50%;
+        top:-620px;
+        left:-320px;
+        z-index:0;
+    "></div>
+
+    <div style="
+        position:absolute;
+        width:900px;
+        height:900px;
+        border:1px solid rgba(255,255,255,0.08);
+        border-radius:50%;
+        bottom:-650px;
+        right:-350px;
+        z-index:0;
+    "></div>
+
+    <!-- Circular Floating Images -->
+    <div style="
+        position:absolute;
+        left:6%;
+        top:200px;
+        width:180px;
+        height:180px;
+        border-radius:50%;
+        overflow:hidden;
+        z-index:1;
+        box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    ">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349"
+             style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+    <div style="
+        position:absolute;
+        right:6%;
+        top:240px;
+        width:200px;
+        height:200px;
+        border-radius:50%;
+        overflow:hidden;
+        z-index:1;
+        box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    ">
+        <img src="https://nickskitchen.com/wp-content/uploads/2025/07/Screenshot-2025-07-28-at-11.15.20-AM.png"
+             style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+    <div style="
+        position:absolute;
+        right:18%;
+        top:80px;
+        width:150px;
+        height:150px;
+        border-radius:50%;
+        overflow:hidden;
+        z-index:1;
+        box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    ">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"
+             style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+    <!-- CONTENT (Always Above Images) -->
+    <div style="position:relative; z-index:2;">
+
+        <h1 style="
+            font-size:56px;
+            margin:0;
+            color:orange;
+            font-weight:700;
+            letter-spacing:-0.5px;
+        ">
+            Better food for more people
+        </h1>
+
+        <p style="
+            margin-top:18px;
+            font-size:19px;
+            color:rgb(0, 0, 0);
+            max-width:640px;
+            margin-left:auto;
+            margin-right:auto;
+            line-height:1.7;
+        ">
+            For over a decade, we’ve enabled our customers to discover new tastes,
+            delivered right to their doorstep.
+        </p>
+
+        <!-- Stats Bar -->
+        <div style="
+            margin-top:65px;
+            display:inline-flex;
+            background:white;
+            padding:24px 48px;
+            border-radius:26px;
+            box-shadow:0 10px 35px rgba(0,0,0,0.4);
+            align-items:center;
+            gap:55px;
+            color:black;
+        ">
+
+            <div style="text-align:center;">
+                <div style="font-size:26px; font-weight:700;">3,00,000+</div>
+                <div style="font-size:14px; color:gray;">restaurants</div>
+            </div>
+
+            <div style="width:1px; height:46px; background:#eee;"></div>
+
+            <div style="text-align:center;">
+                <div style="font-size:26px; font-weight:700;">800+</div>
+                <div style="font-size:14px; color:gray;">cities</div>
+            </div>
+
+            <div style="width:1px; height:46px; background:#eee;"></div>
+
+            <div style="text-align:center;">
+                <div style="font-size:26px; font-weight:700;">3 billion+</div>
+                <div style="font-size:14px; color:gray;">orders delivered</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div style="
+    background:black;
+    color:white;
+    padding:60px 80px 30px;
+    font-family:'Segoe UI', Arial, sans-serif;
+">
+
+    <!-- Top Section -->
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:60px;
+    ">
+
+        <!-- Logo + Column 1 -->
+        <div>
+            <div style="font-size:32px; font-weight:bold; margin-bottom:20px;">
+                UZI
+            </div>
+
+            <div style="color:gray; line-height:28px; font-size:14px;">
+                <div style="color:white;">Eternal</div>
+                <div>Tomato</div>
+                <div>Blinkit</div>
+                <div>District</div>
+                <div>Hyperpure</div>
+                <div>Feeding India</div>
+                <div>Investor Relations</div>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div style="color:gray; line-height:28px; font-size:14px;">
+            <div style="color:white;">For Restaurants</div>
+            <div>Partner With Us</div>
+            <div>Apps For You</div>
+            <div>Restaurant Consulting</div>
+        </div>
+
+        <!-- Column 3 -->
+        <div style="color:gray; line-height:28px; font-size:14px;">
+            <div style="color:white;">For Delivery Partners</div>
+            <div>Partner With Us</div>
+            <div>Apps For You</div>
+        </div>
+
+        <!-- Column 4 -->
+        <div style="color:gray; line-height:28px; font-size:14px;">
+            <div style="color:white;">Learn More</div>
+            <div>Privacy</div>
+            <div>Security</div>
+            <div>Terms of Service</div>
+            <div>Help & Support</div>
+            <div>Report a Fraud</div>
+            <div>Blog</div>
+        </div>
+
+        <!-- Column 5 (Social + Buttons) -->
+        <div>
+
+            <div style="color:white; margin-bottom:15px;">Social Links</div>
+
+            <!-- Fake Social Icons -->
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:white;color:black;text-align:center;line-height:28px;font-size:12px;">in</div>
+                <div style="width:28px;height:28px;border-radius:50%;background:white;color:black;text-align:center;line-height:28px;font-size:12px;">ig</div>
+                <div style="width:28px;height:28px;border-radius:50%;background:white;color:black;text-align:center;line-height:28px;font-size:12px;">f</div>
+                <div style="width:28px;height:28px;border-radius:50%;background:white;color:black;text-align:center;line-height:28px;font-size:12px;">▶</div>
+                <div style="width:28px;height:28px;border-radius:50%;background:white;color:black;text-align:center;line-height:28px;font-size:12px;">X</div>
+            </div>
+
+            <!-- App Buttons -->
+            <div style="
+                background:#111;
+                border:1px solid #333;
+                padding:10px 18px;
+                border-radius:8px;
+                margin-bottom:12px;
+                font-size:13px;
+                width:140px;
+            ">
+                 App Store
+            </div>
+
+            <div style="
+                background:#111;
+                border:1px solid #333;
+                padding:10px 18px;
+                border-radius:8px;
+                font-size:13px;
+                width:140px;
+            ">
+                ▶ Google Play
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Divider Line -->
+    <div style="
+        margin-top:40px;
+        border-top:1px solid #222;
+        padding-top:15px;
+        color:gray;
+        font-size:12px;
+        line-height:20px;
+    ">
+        By continuing past this page, you agree to our Terms of Service, Cookie Policy,
+        Privacy Policy and Content Policies. All trademarks are properties of their
+        respective owners. 2008–2026 © UZI™ Ltd. All rights reserved.
+    </div>
+
+</div>
+
+
+</body>
+</html>

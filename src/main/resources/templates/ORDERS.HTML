@@ -1,0 +1,187 @@
+<div style="
+    display: flex;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f7fb;
+    min-height: 100vh;
+">
+
+    <!-- LEFT SIDEBAR -->
+    <div style="
+        width: 240px;
+        background: linear-gradient(180deg, #111827, #1f2933);
+        color: white;
+        padding-top: 30px;
+        box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+    ">
+
+        <div style="
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        ">
+            ADMIN PANEL
+        </div>
+
+        <div style="padding: 0 20px;">
+
+            <div style="
+                padding: 12px 15px;
+                border-radius: 8px;
+                background: rgba(255,255,255,0.05);
+                margin-bottom: 10px;
+                cursor: pointer;
+            ">
+                📊 Dashboard
+            </div>
+
+            <div style="
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            "
+            onmouseover="this.style.background='rgba(255,255,255,0.08)'"
+            onmouseout="this.style.background='transparent'">
+                🧾 Orders
+            </div>
+
+            <div style="
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            "
+            onmouseover="this.style.background='rgba(255,255,255,0.08)'"
+            onmouseout="this.style.background='transparent'">
+                🍔 Products
+            </div>
+
+            <div style="
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            "
+            onmouseover="this.style.background='rgba(255,255,255,0.08)'"
+            onmouseout="this.style.background='transparent'">
+                👥 Customers
+            </div>
+
+            <div style="
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            "
+            onmouseover="this.style.background='rgba(255,255,255,0.08)'"
+            onmouseout="this.style.background='transparent'">
+                ⚙ Settings
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT CONTENT AREA -->
+    <div style="
+        flex: 1;
+        padding: 30px 40px;
+    ">
+
+        <!-- PAGE HEADER -->
+        <div style="
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 25px;
+        ">
+            Orders Overview
+        </div>
+
+        <!-- YOUR ORIGINAL TABLE (UNCHANGED LOGIC) -->
+        <table border="1" cellpadding="10" style="
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+        ">
+
+            <tr style="
+                background: linear-gradient(135deg, #1f2933, #111827);
+                color: white;
+                text-align: left;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+            ">
+                <th style="padding: 18px; border: none;">Order ID</th>
+                <th style="padding: 18px; border: none;">Total</th>
+                <th style="padding: 18px; border: none;">Time</th>
+                <th style="padding: 18px; border: none;">Items</th>
+            </tr>
+
+            <tr th:each="order : ${orders}" style="
+                border-bottom: 1px solid #f0f2f5;
+                transition: all 0.25s ease;
+            "
+            onmouseover="this.style.background='#f9fafb'; this.style.transform='scale(1.002)'"
+            onmouseout="this.style.background='white'; this.style.transform='scale(1)'">
+
+                <td style="
+                    padding: 16px;
+                    font-weight: 600;
+                    color: #111827;
+                    border: none;
+                "
+                th:text="${order.id}">
+                </td>
+
+                <td style="padding: 16px; border: none;">
+                    <span style="
+                        background: #ecfdf5;
+                        color: #059669;
+                        padding: 6px 12px;
+                        border-radius: 20px;
+                        font-weight: 700;
+                        font-size: 13px;
+                    "
+                    th:text="${order.totalPrice}">
+                    </span>
+                </td>
+
+             <td style="
+    padding: 16px;
+    color: #6b7280;
+    font-size: 13px;
+    border: none;
+"
+th:text="${#temporals.format(#temporals.createNow(), 'dd MMM yyyy, hh:mm a')}">
+</td>
+                <td style="padding: 16px; border: none;">
+                    <div th:each="item : ${order.items}" style="
+                        background: #f3f4f6;
+                        padding: 7px 12px;
+                        border-radius: 18px;
+                        margin: 4px 6px 4px 0;
+                        display: inline-block;
+                        font-size: 13px;
+                        border: 1px solid #e5e7eb;
+                    ">
+                        <span style="font-weight: 600; color: #1f2933;"
+                              th:text="${item.foodName}"></span>
+
+                        <span style="color: #9ca3af;"> × </span>
+
+                        <span style="color: #2563eb; font-weight: 700;"
+                              th:text="${item.quantity}"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
